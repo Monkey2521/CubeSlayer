@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AmmoTrajectory : MonoBehaviour
 {
+    [SerializeField] private AmmoExplosion _explosionPrefab;
     [SerializeField] private float _throwTime = 2f;
 
     private const float g = 9.81f;
@@ -45,5 +47,11 @@ public class AmmoTrajectory : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Instantiate(_explosionPrefab, transform.position, _explosionPrefab.transform.rotation);
+        Destroy(gameObject);
     }
 }
