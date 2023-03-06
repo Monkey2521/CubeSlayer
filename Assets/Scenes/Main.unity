@@ -345,7 +345,6 @@ GameObject:
   - component: {fileID: 1025004219}
   - component: {fileID: 1025004218}
   - component: {fileID: 1025004217}
-  - component: {fileID: 1025004216}
   m_Layer: 0
   m_Name: CubeCounter
   m_TagString: Untagged
@@ -353,19 +352,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1025004216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025004215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3734550f6e5e58a4c8f5352ac87b04cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _countText: {fileID: 1025004217}
 --- !u!114 &1025004217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,14 +633,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de4245be2b831944a1cf9b6cd4aacd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _counter: {fileID: 1025004216}
+  _diedCountText: {fileID: 1025004217}
   _cubePrefab: {fileID: 6813575305292708279, guid: d0b701500bda6db458022b68edcea937, type: 3}
   _maxCubesOnScene: 3
-  _startCubesCount: 3
+  _startCubesCount: 1
   _minCubeRespawnTime: 1
   _maxCubeRespawnTime: 3
   _cubesSpawnHeight: 0.5
-  _cubesSpawnDeltaPos: 0.5
+  _edgeDeltaPos: 0.5
   _upperLeftCorner: {x: -5, y: 0, z: 5}
   _bottomRightCorner: {x: 5, y: 0, z: -5}
 --- !u!4 &1214750882

@@ -110,8 +110,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aecbdea14707a3046bb26db1be8177bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 6
-  _rotationSpeed: 50
-  _leapSpeed: 18
+  _speed: 2
+  _rotationSpeed: 90
+  _minMovingTime: 1
+  _maxMovingTime: 3
+  _minRotationTime: 1
+  _maxRotationTime: 2
+  _leapSpeed: 6
   _minLeapCooldown: 3
   _maxLeapCooldown: 6
+  _minLeapTime: 1
+  _maxLeapTime: 2

@@ -1,20 +1,24 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CubeSpawner : MonoBehaviour
 {
-    [SerializeField] private CubesCounter _counter;
+    [Header("Settings")]
+    [SerializeField] private TMP_Text _diedCountText;
     [SerializeField] private CubeMovement _cubePrefab;
 
     [SerializeField] private int _maxCubesOnScene = 3;
     [SerializeField] private int _startCubesCount = 3;
 
+    [Header("Spawn")]
     [SerializeField] private float _minCubeRespawnTime;
     [SerializeField] private float _maxCubeRespawnTime;
 
     [SerializeField] private float _cubesSpawnHeight = 0.5f; // spawn height
-    [SerializeField] private float _cubesSpawnDeltaPos = 0.5f; // edges position correction
+    [SerializeField] private float _edgeDeltaPos = 0.5f; // edges position correction
 
+    [Header("Field edges")]
     [SerializeField] private Vector3 _upperLeftCorner; // game field
     [SerializeField] private Vector3 _bottomRightCorner; // edges
 
@@ -22,10 +26,16 @@ public class CubeSpawner : MonoBehaviour
     private List<CubeMovement> _cubes;
 
     private float _spawnTimer;
+    private int _count;
+
     public int CurrentSpawned => _cubes.Count;
 
     private void Start()
     {
+        _count = 0;
+
+        UpdateCounter();
+
         _cubesPool = new List<CubeMovement>();
         _cubes = new List<CubeMovement>();
 
@@ -57,6 +67,8 @@ public class CubeSpawner : MonoBehaviour
             if (_spawnTimer <= 0)
             {
                 SpawnCube();
+
+                _spawnTimer = Random.Range(_minCubeRespawnTime, _maxCubeRespawnTime);
             }
         }
 
@@ -70,9 +82,9 @@ public class CubeSpawner : MonoBehaviour
     {
         Vector3 spawnPos = new Vector3
             (
-                Random.Range(_upperLeftCorner.x + _cubesSpawnDeltaPos, _bottomRightCorner.x - _cubesSpawnDeltaPos),
+                Random.Range(_upperLeftCorner.x + _edgeDeltaPos, _bottomRightCorner.x - _edgeDeltaPos),
                 _cubesSpawnHeight,
-                Random.Range(_bottomRightCorner.z + _cubesSpawnDeltaPos, _upperLeftCorner.z - _cubesSpawnDeltaPos)
+                Random.Range(_bottomRightCorner.z + _edgeDeltaPos, _upperLeftCorner.z - _edgeDeltaPos)
             );
 
         CubeMovement cube = _cubesPool[_cubesPool.Count - 1];
@@ -80,17 +92,37 @@ public class CubeSpawner : MonoBehaviour
         cube.transform.position = spawnPos;
         cube.gameObject.SetActive(true);
 
+        cube.Initialize(this);
+
         _cubes.Add(cube);
         _cubesPool.Remove(cube);
+    }
+
+    public bool CheckEdgeReaching(Vector3 position, Vector3 viewSide)
+    {
+        Vector3 viewPos = position + viewSide;
+
+        return viewPos.x <= _upperLeftCorner.x + _edgeDeltaPos ||
+               viewPos.z >= _upperLeftCorner.z - _edgeDeltaPos ||
+               viewPos.x >= _bottomRightCorner.x - _edgeDeltaPos ||
+               viewPos.z <= _bottomRightCorner.z + _edgeDeltaPos;
     }
 
     public void OnCubeDies(CubeMovement cube)
     {
         cube.gameObject.SetActive(false);
+        cube.ResetCube();
 
         _cubesPool.Add(cube);
         _cubes.Remove(cube);
 
-        _counter.OnCubeDies();
+        _count++;
+
+        UpdateCounter();
+    }
+
+    private void UpdateCounter()
+    {
+        _diedCountText.text = _count.ToString();
     }
 }
