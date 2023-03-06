@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 2171919650701079284}
   - component: {fileID: 4829211135554138114}
   m_Layer: 5
-  m_Name: Sphere
+  m_Name: AmmoCooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using TMPro;
+using UnityEngine;
 
 public class CubesCounter : MonoBehaviour
 {
-    [SerializeField] private Text _countText;
+    [SerializeField] private TMP_Text _countText;
 
     private int _count;
 
