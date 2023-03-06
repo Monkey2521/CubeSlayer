@@ -36,7 +36,7 @@ public class AmmoThrower : MonoBehaviour
             {
                 if (Input.GetMouseButton(0))
                 {
-                    touchPosition = Input.GetTouch(0).position;
+                    touchPosition = Input.mousePosition;
 
                     onInput = true;
                 }
@@ -48,7 +48,9 @@ public class AmmoThrower : MonoBehaviour
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(touchPosition), out RaycastHit hit))
             {
-                // TODO throw ammo
+                AmmoTrajectory ammo = Instantiate(_ammoPrefab, transform.position, _ammoPrefab.transform.rotation);
+
+                ammo.Initialize(hit.point);
             }
         }
         else
