@@ -51,6 +51,8 @@ public class AmmoThrower : MonoBehaviour
                 AmmoTrajectory ammo = Instantiate(_ammoPrefab, transform.position, _ammoPrefab.transform.rotation);
 
                 ammo.Initialize(hit.point);
+
+                _counter.Throw();
             }
         }
         else

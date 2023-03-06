@@ -166,3 +166,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d170867c6db89498a5859655787a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cooldownImage: {fileID: 4245377384061106064}
